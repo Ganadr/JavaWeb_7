@@ -1,0 +1,113 @@
+<div th:replace="customer/header_footer/header :: header"></div>
+<main class="main">
+	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+		<div class="container">
+			<h1 class="page-title">
+				Checkout<span>Shop</span>
+			</h1>
+		</div>
+		<!-- End .container -->
+	</div>
+	<!-- End .page-header -->
+	<nav aria-label="breadcrumb" class="breadcrumb-nav">
+		<div class="container">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+				<li class="breadcrumb-item"><a href="checkout.html#">Shop</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Checkout</li>
+			</ol>
+		</div>
+		<!-- End .container -->
+	</nav>
+	<!-- End .breadcrumb-nav -->
+
+	<div class="page-content">
+		<div class="checkout">
+			<div class="container">
+
+				<form id="orderForm" method="POST" action="/user/orderCheckout">
+					<div class="row">
+						<div class="col-lg-9">
+							<h2 class="checkout-title">THÔNG TIN LIÊN HỆ</h2>
+							<label>Họ tên</label>
+							<input type="text" class="form-control" placeholder="Nhập họ tên" required>
+							<label>Địa chỉ</label>
+							<input type="text" class="form-control" placeholder="Nhập địa chỉ nhận hàng" required>
+							<label>Địa chỉ email</label>
+							<input type="text" class="form-control" placeholder="Nhập địa chỉ email" required>
+							<label>Số điện thoại</label>
+							<input type="text" class="form-control" placeholder="Nhập số điện thoại" required>
+						</div>
+						<aside class="col-lg-3">
+							<div class="summary">
+								<h3 class="summary-title">Đơn hàng của bạn</h3>
+								<table id="cart-table" class="table">
+									<thead>
+										<tr>
+											<th>Sản phẩm</th>
+											<th>Tiền cần trả</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+								<div class="accordion-summary" id="accordion-payment">
+									<div class="card">
+										<div class="card-header" id="heading-1">
+											<h2 class="card-title">
+												<h5>Hình thức chuyển tiền</h5>
+											</h2>
+										</div>
+									</div>
+									<div class="card">
+										<div class="card-header" id="heading-4">
+											<h2 class="card-title">
+												<label>
+													<input type="radio" name="payment-method" value="Chuyển khoản"
+														required>
+													Chuyển khoản
+												</label>
+											</h2>
+										</div>
+									</div>
+									<div class="card">
+										<div class="card-header" id="heading-5">
+											<h2 class="card-title">
+												<label>
+													<input type="radio" name="payment-method" value="Tiền mặt" required>
+													Tiền mặt
+												</label>
+											</h2>
+										</div>
+									</div>
+								</div>
+								<div class="dropdown-cart-total">
+									<span>Tổng cộng</span>
+									<span class="cart-total-price" id="total_price"></span>
+								</div>
+								<button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+									<span class="btn-text">Đặt hàng</span>
+								</button>
+							</div>
+						</aside>
+					</div>
+				</form>
+
+			</div>
+			<!-- End .summary -->
+			</aside>
+			<!-- End .col-lg-3 -->
+		</div>
+		<!-- End .row -->
+		</form>
+	</div>
+	<!-- End .container -->
+	</div>
+	<!-- End .checkout -->
+	</div>
+	<!-- End .page-content -->
+</main>
+<!-- End .main -->
+
+<div th:replace="customer/header_footer/footer :: footer"></div>
+<script th:src="@{/assets/js/checkout.js}"></script>

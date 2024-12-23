@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:fragment="header">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Cửa hàng tạp hóa trực tuyến</title>
+<meta name="keywords" content="HTML5 Template">
+<meta name="description"
+	content="His and Hers - Bootstrap eCommerce Template">
+<meta name="author" content="p-themes">
+<!-- Favicon -->
+
+<link rel="apple-touch-icon" sizes="180x180"
+	th:href="@{/assets/images/icons/apple-touch-icon.png}">
+<link rel="icon" type="image/png" sizes="32x32"
+	th:href="@{/assets/images/icons/favicon-32x32.png}">
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{/assets/images/icons/favicon-16x16.png}">
+<link rel="manifest"
+	th:href="@{/assets/images/icons/site.webmanifest.txt}">
+<link rel="mask-icon"
+	th:href="@{/assets/images/icons/safari-pinned-tab.svg}" color="#666666">
+<link rel="shortcut icon" th:href="@{/assets/images/icons/favicon.ico}">
+<meta name="apple-mobile-web-app-title" content="His and Hers">
+<meta name="application-name" content="His and Hers">
+<meta name="msapplication-TileColor" content="#cc9966">
+<meta name="msapplication-config"
+	th:href="@{/assets/images/icons/browserconfig.xml}">
+
+<meta name="theme-color" content="#ffffff">
+<!-- Plugins CSS File -->
+
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{/assets/css/plugins/owl-carousel/owl.carousel.css}">
+<link rel="stylesheet"
+	th:href="@{/assets/css/plugins/jquery.countdown.css}">
+<link rel="stylesheet" th:href="@{/assets/css/style.css}">
+<link rel="stylesheet" th:href="@{/assets/css/skins/skin-demo-7.css}">
+<link rel="stylesheet" th:href="@{/assets/css/demos/demo-7.css}">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+</head>
+
+<body th:fragment="header">
+	<div class="page-wrapper">
+		<div class="notification"
+			style="background-image: url('assets/images/hisandhers/images/notification-back.jpg')">
+
+		</div>
+		<header class="header header-7">
+			<div class="header-top">
+				<div class="container-fluid">
+					<div class="header-left">
+						<div class="header-dropdown">
+							<a href="index-7.html#">AED</a>
+							<div class="header-menu">
+								<ul>
+									<li><a href="index-7.html#">Eur</a></li>
+									<li><a href="index-7.html#">Usd</a></li>
+								</ul>
+							</div>
+							<!-- End .header-menu -->
+						</div>
+						<!-- End .header-dropdown -->
+
+						<div class="header-dropdown">
+							<a href="index-7.html#">Eng</a>
+							<div class="header-menu">
+								<ul>
+									<li><a href="index-7.html#">English</a></li>
+									<li><a href="index-7.html#">French</a></li>
+									<li><a href="index-7.html#">Spanish</a></li>
+								</ul>
+							</div>
+							<!-- End .header-menu -->
+						</div>
+						<!-- End .header-dropdown -->
+					</div>
+					<!-- End .header-left -->
+
+					<div class="header-right">
+						<ul class="top-menu">
+							<li><a href="index-7.html#">Links</a>
+								<ul>
+									<li><a href="tel:#"><i class="icon-phone"></i>SĐT:
+											091.110.3885</a></li>
+									<li><a href="/contact">Thông tin liên lạc</a></li>
+									<li class="dropdown"><a href="#" class="dropdown-toggle"
+										data-toggle="dropdown"> <i class="icon-user"></i> <span
+											class="hidden-sm hidden-xs" id="username-display">Login</span>
+									</a>
+										<ul class="dropdown-menu" id="user-menu"
+											style="display: none;">
+											<li><a href="/profile">Hồ sơ</a></li>
+											<li><a href="#" id="logoutBtn">Đăng xuất</a></li>
+										</ul></li>
+								</ul></li>
+						</ul>
+						<!-- End .top-menu -->
+					</div>
+					<!-- End .header-right -->
+				</div>
+				<!-- End .container-fluid -->
+			</div>
+			<!-- End .header-top -->
+
+			<div class="header-middle sticky-header">
+				<div class="container-fluid">
+					<div class="header-left">
+						<button class="mobile-menu-toggler">
+							<span class="sr-only">Toggle mobile menu</span> <i
+								class="icon-bars"></i>
+						</button>
+
+						<a href="/" class="logo">
+							<H3>TUANTN SHOP</H3>
+						</a>
+
+
+						<nav class="main-nav">
+							<ul class="menu sf-arrows">
+								<li class="megamenu-container active"><a href="/"
+									class="sf-with-ul">Trang chủ</a></li>
+								<li><a href="/user/watchCategory" class="sf-with-ul">Danh
+										mục</a>
+									<div class="megamenu megamenu-md">
+										<div class="row">
+											<div class="col-md-6">
+												<ul>
+													<li
+														th:each="category, stat : ${categories.subList(0, T(java.lang.Math).min(4, categories.size()))}">
+														<a th:href="@{/user/category/{id}(id=${category.id})}"
+														th:text="${category.name}"></a>
+													</li>
+												</ul>
+											</div>
+											<div class="col-md-6">
+												<ul>
+													<li
+														th:each="category, stat : ${categories.subList(4, T(java.lang.Math).min(8, categories.size()))}">
+														<a th:href="@{/user/category/{id}(id=${category.id})}"
+														th:text="${category.name}"></a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div></li>
+									<li><a href="/user/product" class="sf-with-ul">Xem sản phẩm</a></li>
+							</ul>
+						</nav>
+
+
+
+						<!-- End .main-nav -->
+					</div>
+					<!-- End .header-left -->
+
+					<div class="header-right">
+						<div
+							class="header-search header-search-extended header-search-visible">
+							<a href="index-7.html#" class="search-toggle" role="button"><i
+								class="icon-search"></i></a>
+							<form action="#" method="get">
+								<div class="header-search-wrapper search-wrapper-wide">
+									<label for="q" class="sr-only">Search</label> <input
+										type="search" class="form-control" name="q" id="q"
+										placeholder="Search product ..." required>
+									<button class="btn btn-primary" type="submit">
+										<i class="icon-search"></i>
+									</button>
+								</div>
+								<!-- End .header-search-wrapper -->
+							</form>
+						</div>
+						<!-- End .header-search -->
+
+						<div class="dropdown cart-dropdown">
+							<a href="" class="dropdown-toggle" role="button"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false" data-display="static"> <i
+								class="icon-shopping-cart"></i> <span class="cart-count">0</span>
+							</a>
+
+
+
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="dropdown-cart-products">
+									<!-- Products will be dynamically added here -->
+								</div>
+								<!-- End .cart-product -->
+								<div class="dropdown-cart-total">
+									<span>Total</span> <span class="cart-total-price">$0.00</span>
+								</div>
+								<!-- End .dropdown-cart-total -->
+								<div class="dropdown-cart-action">
+									<a href="/user/viewCart" class="btn btn-primary">View Cart</a>
+									<a href="/user/checkOut" class="btn btn-outline-primary-2">
+										<span>Checkout</span> <i class="icon-long-arrow-right"></i>
+									</a>
+								</div>
+								<!-- End .dropdown-cart-action -->
+							</div>
+
+							<!-- End .dropdown-menu -->
+						</div>
+						<!-- End .cart-dropdown -->
+					</div>
+					<!-- End .header-right -->
+				</div>
+				<!-- End .container-fluid -->
+			</div>
+			<!-- End .header-middle -->
+
+		</header>
+
+		<!-- End .header -->

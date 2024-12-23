@@ -1,0 +1,125 @@
+<!-- customer/index.html -->
+<div th:replace="customer/header_footer/header :: header"></div>
+<main class="main">
+	<div class="container-fluid">
+		<div>
+			<div class="row">
+				<div th:each="slider : ${sliders}" class="col-md-4">
+					<div class="banner banner-overlay">
+						<a href="#"> <img th:src="@{'/uploads/images/' + ${slider.image}}" th:alt="${slider.name}"
+								style="height: 359px">
+						</a>
+						<div class="banner-content">
+							<h3 class="banner-title text-white" th:text="${slider.name}"></h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End .container -->
+	<div class="icon-boxes-container bg-transparent">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-12 icon-boxes">
+					<div class="col-sm-6 col-lg-4">
+						<div class="icon-box icon-box-side">
+							<span class="icon-box-icon"> <i class="icon-truck"></i>
+							</span>
+							<div class="icon-box-content">
+								<h3 class="icon-box-title">Chính sách bảo mật</h3>
+								<p>Website bảo mật rất tốt cho khách hàng</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-lg-4">
+						<div class="icon-box icon-box-side">
+							<span class="icon-box-icon"> <i class="icon-rotate-left"></i>
+							</span>
+							<div class="icon-box-content">
+								<h3 class="icon-box-title">Về giá cả</h3>
+								<p>Giá cả rất hạt dẻ</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-lg-4">
+						<div class="icon-box icon-box-side">
+							<span class="icon-box-icon"> <i class="icon-headphones"></i>
+							</span>
+							<div class="icon-box-content">
+								<h3 class="icon-box-title">Chất lượng</h3>
+								<p>Chất lượng sp rất tốt</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End .icon-boxes-container -->
+
+	<div class="container-fluid">
+		<div class="heading heading-center mb-3">
+			<h2 class="title">MỘT SỐ SẢN PHẨM</h2>
+			<!-- Danh sách danh mục -->
+			<ul class="nav nav-pills justify-content-center" role="tablist">
+				<li class="nav-item" th:each="category, iterStat : ${categories}">
+					<a class="nav-link" th:classappend="${iterStat.index == 0} ? 'active'"
+						th:id="'category-' + ${category.id}" th:data-toggle="'tab'"
+						th:href="'#tab-category-' + ${category.id}" role="tab"
+						th:aria-controls="'tab-category-' + ${category.id}" th:aria-selected="${iterStat.index == 0}">
+						<span th:text="${category.name}">Category Name</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- Sản phẩm theo danh mục -->
+		<div class="tab-content">
+			<div th:each="category, iterStat : ${categories}" class="tab-pane p-0 fade"
+				th:classappend="${iterStat.index == 0} ? 'show active'" th:id="'tab-category-' + ${category.id}"
+				role="tabpanel" th:aria-labelledby="'category-' + ${category.id}">
+				<div class="products">
+					<div class="row justify-content-center">
+						<!-- Hiển thị tối đa 5 sản phẩm -->
+						<div class="col-6 col-md-4 col-lg-3 col-xl-5col"
+							th:each="product, productStat : ${categoryProducts[category.id].subList(0, T(java.lang.Math).min(categoryProducts[category.id].size(), 5))}">
+							<div class="product product-7 text-center">
+
+
+								<figure class="product-media">
+									<a th:href="@{'/product/' + ${product.id}}">
+										<img th:src="@{'/uploads/images/' + ${product.image}}" th:alt="${product.name}"
+											class="product-image">
+									</a>
+									<div class="product-action">
+										<a href="#" class="btn-product btn-cart"
+											th:data-product-id="${product.id}"><span>Thêm vào giỏ hàng</span></a>
+									</div>
+								</figure>
+
+
+
+
+								<div class="product-body">
+									<h3 class="product-title">
+										<a th:href="@{'/product/' + ${product.id}}" th:text="${product.name}">Product
+											Name</a>
+									</h3>
+									<div class="product-price" th:text="'$' + ${product.price}">Giá
+										gốc</div>
+									<div class="product-discount" th:if="${product.discount > 0}">
+										<span>Giảm giá:</span> <span th:text="${product.discount} + '%'">Giảm giá</span>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<div th:replace="customer/header_footer/footer :: footer"></div>
+<script th:src="@{/assets/js/cart.js}"></script>

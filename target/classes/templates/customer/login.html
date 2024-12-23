@@ -1,0 +1,222 @@
+<div th:replace="customer/header_footer/header :: header"></div>
+<!-- SweetAlert2 -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<main class="main">
+	<div
+		class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
+		style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
+		<div class="container">
+			<!-- Modal Thông báo -->
+			<div class="modal fade" id="notificationModal" tabindex="-1"
+				aria-labelledby="notificationModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="notificationModalLabel">Thông
+								báo</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div id="alertMessage" class="alert alert-success" role="alert">
+								<!-- Nội dung thông báo sẽ được cập nhật ở đây -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-box">
+				<div class="form-tab">
+					<ul class="nav nav-pills nav-fill" role="tablist">
+						<li class="nav-item"><a class="nav-link" id="signin-tab"
+							data-toggle="tab" href="#signin" role="tab"
+							aria-controls="signin" aria-selected="false" >Đăng nhập</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							id="register-tab" data-toggle="tab" href="#register" role="tab"
+							aria-controls="register" aria-selected="true">Đăng ký</a></li>
+					</ul>
+
+					<div class="tab-content">
+						<!-- Tab Đăng Nhập -->
+						<div class="tab-pane fade" id="signin" role="tabpanel"
+							aria-labelledby="signin-tab">
+							<form id="loginForm">
+								<div class="form-group">
+									<label for="signin-user">Tên đăng nhập</label> <input
+										type="text" class="form-control" id="signin-user" name="uname"
+										required>
+								</div>
+								<div class="form-group">
+									<label for="signin-password">Mật khẩu *</label> <input
+										type="password" class="form-control" id="signin-password"
+										name="password" required>
+								</div>
+								<div
+									class="form-footer d-flex justify-content-between align-items-center">
+									<button type="button" id="loginBtn"
+										class="btn btn-outline-primary-2">
+										ĐĂNG NHẬP <i class="icon-long-arrow-right"></i>
+									</button>
+									<a href="#" class="forgot-link">Quên mật khẩu?</a>
+								</div>
+							</form>
+
+
+						</div>
+
+						<!-- Tab Đăng Ký -->
+						<div class="tab-pane fade show active" id="register"
+							role="tabpanel" aria-labelledby="register-tab">
+							<form id="registerForm">
+								<div class="form-group">
+									<label for="register-username">Tên đăng nhập</label> <input
+										type="text" class="form-control" id="register-username"
+										name="uname" required>
+								</div>
+
+								<div class="form-group">
+									<label for="register-password">Mật khẩu *</label> <input
+										type="password" class="form-control" id="register-password"
+										name="pwd" required>
+								</div>
+
+								<div class="form-group">
+									<label for="register-fullname">Họ và tên</label> <input
+										type="text" class="form-control" id="register-fullname"
+										name="fname">
+								</div>
+
+								<div class="form-group">
+									<label for="register-phone">Số điện thoại</label> <input
+										type="text" class="form-control" id="register-phone"
+										name="phone">
+								</div>
+
+								<div class="form-group">
+									<label for="register-address">Địa chỉ</label> <input
+										type="text" class="form-control" id="register-address"
+										name="address">
+								</div>
+
+								<div
+									class="form-footer d-flex justify-content-between align-items-center">
+									<button type="button" id="registerBtn"
+										class="btn btn-outline-primary-2">
+										ĐĂNG KÝ <i class="icon-long-arrow-right"></i>
+									</button>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input"
+											id="register-policy" required> <label
+											class="custom-control-label" for="register-policy">
+											Tôi đồng ý với <a href="#">các điều khoản</a> *
+										</label>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- JavaScript -->
+	<script>
+	document.addEventListener("DOMContentLoaded", function () {
+	    const loginBtn = document.getElementById("loginBtn");
+
+	    loginBtn.addEventListener("click", function () {
+	        const formData = {
+	            uname: document.getElementById("signin-user").value,
+	            password: document.getElementById("signin-password").value,
+	        };
+
+	        fetch('/login', {
+	            method: 'POST',
+	            headers: {
+	                'Content-Type': 'application/json'
+	            },
+	            body: JSON.stringify(formData)
+	        })
+	        .then(response => response.json())
+	        .then(data => {
+	            if (data.success) {
+	                // Lưu tên người dùng vào localStorage
+	                localStorage.setItem("username", formData.uname);
+
+	                // Điều hướng đến trang tương ứng
+	                window.location.href = data.redirectUrl;
+	            } else {
+	                Swal.fire({
+	                    icon: 'error',
+	                    title: 'Đăng nhập thất bại',
+	                    text: data.message,
+	                });
+	            }
+	        })
+	        .catch(error => {
+	            console.error('Lỗi:', error);
+	        });
+	    });
+	});
+
+</script>
+	
+	<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const registerBtn = document.getElementById("registerBtn");
+        const modalElement = new bootstrap.Modal(document.getElementById('notificationModal'));
+        const alertMessage = document.getElementById('alertMessage');
+
+        registerBtn.addEventListener("click", function () {
+            const formData = {
+                uname: document.getElementById("register-username").value,
+                pwd: document.getElementById("register-password").value,
+                fname: document.getElementById("register-fullname").value,
+                phone: document.getElementById("register-phone").value,
+                address: document.getElementById("register-address").value
+            };
+
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alertMessage.textContent = data.message;
+                    alertMessage.classList.remove("alert-danger");
+                    alertMessage.classList.add("alert-success");
+                } else {
+                    alertMessage.textContent = data.message;
+                    alertMessage.classList.remove("alert-success");
+                    alertMessage.classList.add("alert-danger");
+                }
+                modalElement.show();
+            })
+            .catch(error => {
+                console.error('Lỗi:', error);
+            });
+        });
+    });
+</script>
+
+
+	<!-- End .login-page section-bg -->
+
+	<!-- Modal Thông Báo -->
+
+	<!-- End .jQuery -->
+</main>
+<!-- End .main -->
+<div th:replace="customer/header_footer/footer :: footer"></div>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Base Template</title>
+</head>
+<body>
+    <!-- Header -->
+    <div th:include="customer/header_footer/header :: header"></div>
+
+    <!-- Content -->
+    <main>
+        <div th:insert="~{customer/index :: content}"></div>
+    </main>
+
+    <!-- Footer -->
+    <div th:include="customer/header_footer/footer :: footer"></div>
+</body>
+</html>
+8

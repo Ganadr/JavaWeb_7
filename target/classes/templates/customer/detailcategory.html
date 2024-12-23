@@ -1,0 +1,76 @@
+<div th:replace="customer/header_footer/header :: header"></div>
+<main class="main">
+	<div class="page-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9">
+					<div class="toolbox">
+						<!-- Existing toolbox content -->
+					</div>
+					<!-- End .toolbox -->
+
+					<div class="products mb-3">
+						<div class="row justify-content-center" id="product-list">
+							<div th:each="product : ${products}" class="col-6 col-md-4 col-lg-4">
+								<div class="product product-7 text-center" data-product-id="${product.id}">
+									<figure class="product-media">
+										<a th:href="@{'/product/' + ${product.id}}">
+											<img th:src="@{'/uploads/images/' + ${product.image}}" alt="Product image"
+												class="product-image">
+										</a>
+										<div class="product-action-vertical">
+											<a href="#" class="btn-product-icon btn-wishlist btn-expandable"
+												th:attr="data-product-id=${product.id}">
+												<span>add to wishlist</span>
+											</a>
+											<a href="popup/quickView.html" class="btn-product-icon btn-quickview"
+												title="Quick view" th:attr="data-product-id=${product.id}">
+												<span>Quick view</span>
+											</a>
+										</div>
+										<div class="product-action">
+											<a href="#" class="btn-product btn-cart"
+												th:attr="data-product-id=${product.id}">
+												<span>add to cart</span>
+											</a>
+										</div>
+									</figure>
+									<div class="product-body">
+										<h3 class="product-title">
+											<a th:href="@{'/product.html?id=' + ${product.id}}"
+												th:text="${product.name}"></a>
+										</h3>
+										<div class="product-price" th:text="'$' + ${product.price}"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- End .row -->
+					</div>
+					<!-- End .products -->
+
+					<nav aria-label="Page navigation">
+						<ul class="pagination justify-content-center">
+							<li th:if="${totalPages != null}" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+								th:classappend="${i == currentPage} ? 'active'">
+								<a class="page-link"
+									th:href="@{'/user/category/' + ${category_detail.id} + '?page=' + ${i}}"
+									th:text="${i + 1}"></a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+				<!-- End .col-lg-9 -->
+				<aside class="col-lg-3 order-lg-first">
+				</aside>
+				<!-- End .col-lg-3 -->
+			</div>
+			<!-- End .row -->
+		</div>
+		<!-- End .container -->
+	</div>
+	<!-- End .page-content -->
+</main>
+<!-- End .main -->
+<div th:replace="customer/header_footer/footer :: footer"></div>
+<script th:src="@{/assets/js/cart.js}"></script>
